@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "../components/ui/calendar";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
+} from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
 import { Clock, User } from "lucide-react";
 import { format } from "date-fns";
 import { sk } from "date-fns/locale";

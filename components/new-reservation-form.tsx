@@ -3,10 +3,10 @@
 import type React from "react";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation"; // Added useSearchParams
-import { Button } from "@/components/ui/button";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Calendar } from "@/components/ui/calendar";
+import { Button } from "../components/ui/button";
+import { Label } from "../components/ui/label";
+import { Textarea } from "../components/ui/textarea";
+import { Calendar } from "../components/ui/calendar";
 import toast, { Toaster } from "react-hot-toast";
 
 import { format } from "date-fns";
@@ -16,7 +16,7 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "../components/ui/popover";
 import { cn } from "@/lib/utils";
 import {
   Select,
@@ -24,7 +24,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../components/ui/select";
 
 export function NewReservationForm() {
   const router = useRouter();

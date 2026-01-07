@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Button } from "../../components/ui/button";
+import { Badge } from "../../components/ui/badge";
 import {
   Card,
   CardContent,
@@ -10,18 +10,18 @@ import {
   CardHeader,
   CardTitle,
   CardFooter
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea"; // Assuming it exists or I'll use Input
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { ReservationsList } from "@/components/reservations-list";
+} from "../../components/ui/card";
+import { Input } from "../../components/ui/input";
+import { Label } from "../../components/ui/label";
+import { Textarea } from "../../components/ui/textarea"; // Assuming it exists or I'll use Input
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../components/ui/tabs";
+import { ReservationsList } from "../../components/reservations-list";
 import { Building2, Calendar, Plus, Clock, User, Briefcase } from "lucide-react";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import { sk } from "date-fns/locale";
-import { CompanyAvailabilityCalendar } from "@/components/company-availability-calendar";
+import { CompanyAvailabilityCalendar } from "../../components/company-availability-calendar";
 
 // Simple modal/dialog for booking would be nice, but for now I'll inline it or use a separate view logic
 // Let's implement Company List and Creation here.

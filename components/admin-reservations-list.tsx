@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Badge } from "../components/ui/badge";
+import { Button } from "../components/ui/button";
 import { Calendar, Clock, Trash2, User, Mail } from "lucide-react";
 import { format } from "date-fns";
 import { sk } from "date-fns/locale";
@@ -16,14 +16,14 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
+} from "../components/ui/alert-dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../components/ui/select";
 import toast from "react-hot-toast";
 
 interface Reservation {

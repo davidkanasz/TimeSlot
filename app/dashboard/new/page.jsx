@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../components/ui/button";
 import { Clock, ArrowLeft, CalendarDays } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import {
@@ -11,8 +11,8 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { NewReservationForm } from "@/components/new-reservation-form";
+} from "../../../components/ui/card";
+import { NewReservationForm } from "../../../components/new-reservation-form";
 
 export default async function NewReservationPage() {
   const { userId } = await auth();
