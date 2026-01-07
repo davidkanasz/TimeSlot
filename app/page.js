@@ -1,7 +1,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Button } from "../../components/ui/button";
+import { Button } from "../components/ui/button";
 import { Calendar, Clock, Users, Shield } from "lucide-react";
 
 export default async function HomePage() {
