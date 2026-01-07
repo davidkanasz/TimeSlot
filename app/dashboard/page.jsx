@@ -4,9 +4,9 @@ import Link from "next/link";
 import { Button } from "../../components/ui/button";
 import { Clock, CalendarDays, Plus } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
-import { getUserStats } from "@/lib/stats";
-import dbConnect from "@/lib/mongodb";
-import Company from "@/models/Company";
+import { getUserStats } from "../../lib/stats";
+import dbConnect from "../../lib/mongodb";
+import Company from "../../models/Company";
 import ClientView from "./client-view";
 
 export default async function DashboardPage() {

@@ -20,7 +20,7 @@ import {
 } from "../../components/ui/card";
 import { AdminReservationsList } from "../../components/admin-reservations-list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
-import { getAdminStats } from "@/lib/stats";
+import { getAdminStats } from "../../lib/stats";
 
 export default async function AdminPage() {
   const { userId } = await auth();
