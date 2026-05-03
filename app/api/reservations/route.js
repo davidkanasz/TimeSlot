@@ -56,16 +56,17 @@ export async function POST(request) {
 
     await dbConnect();
 
-    // Check if time slot is available for THIS company
+    // Skontroluj, či je časový slot dostupný pre TÚTO spoločnosť
     const reservationDate = new Date(date);
     const existingReservations = await Reservation.find({
       companyId, 
       date: reservationDate,
       status: { $ne: "cancelled" },
       $or: [
-        { startTime: { $lt: endTime }, endTime: { $gt: startTime } }, // Overlapping time check
+        { startTime: { $lt: endTime }, endTime: { $gt: startTime } }, // Kontrola prekrývania času
       ],
-    });
+    }); 
+    
 
     if (existingReservations.length > 0) {
       return NextResponse.json(
