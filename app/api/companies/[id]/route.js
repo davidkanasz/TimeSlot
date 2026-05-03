@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "../../../../lib/mongodb";
 import Company from "../../../../models/Company";
+import Reservation from "../../../../models/Reservation";
 
 export async function PATCH(req, { params }) {
   try {
@@ -38,6 +39,38 @@ export async function PATCH(req, { params }) {
     return NextResponse.json({ success: true, company });
   } catch (error) {
     console.error("Error updating company:", error);
+    return NextResponse.json(
+      { error: "Internal Server Error" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(req, { params }) {
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { id } = await params;
+    await dbConnect();
+
+    const company = await Company.findById(id);
+    if (!company) {
+      return NextResponse.json({ error: "Company not found" }, { status: 404 });
+    }
+
+    if (company.ownerId !== userId) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    await Reservation.deleteMany({ companyId: id });
+    await company.deleteOne();
+
+    return NextResponse.json({ success: true });
+  } catch (error) {
+    console.error("Error deleting company:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

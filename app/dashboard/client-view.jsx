@@ -17,7 +17,7 @@ import { Textarea } from "../../components/ui/textarea"; // Assuming it exists o
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../../components/ui/select";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../components/ui/tabs";
 import { ReservationsList } from "../../components/reservations-list";
-import { Building2, Calendar, Plus, Clock, User, Briefcase } from "lucide-react";
+import { Building2, Calendar, Plus, Clock, User, Briefcase, Trash2 } from "lucide-react";
 import toast from "react-hot-toast";
 import { format } from "date-fns";
 import { sk } from "date-fns/locale";
@@ -188,7 +188,7 @@ export default function ClientView({ initialMyCompany }) {
               </CardContent>
             </Card>
           ) : (
-            <CompanyDashboard company={myCompany} />
+            <CompanyDashboard company={myCompany} onDelete={() => setMyCompany(null)} />
           )}
         </TabsContent>
       </Tabs>
@@ -231,7 +231,7 @@ function CompanyCard({ company }) {
   );
 }
 
-function CompanyDashboard({ company }) {
+function CompanyDashboard({ company, onDelete }) {
   const [reservations, setReservations] = useState([]);
   const [selectedReservation, setSelectedReservation] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
@@ -270,6 +270,21 @@ function CompanyDashboard({ company }) {
     }
   };
 
+  const handleDeleteCompany = async () => {
+    if (!confirm("Naozaj chcete odregistrovať prevádzku? Všetky rezervácie budú zmazané.")) return;
+    try {
+      const res = await fetch(`/api/companies/${company._id}`, { method: "DELETE" });
+      if (res.ok) {
+        toast.success("Prevádzka bola odregistrovaná");
+        onDelete();
+      } else {
+        toast.error("Nepodarilo sa odregistrovať prevádzku");
+      }
+    } catch (err) {
+      toast.error("Nastala chyba");
+    }
+  };
+
   const handleUpdateCompany = async (e) => {
     e.preventDefault();
     try {
@@ -298,14 +313,24 @@ function CompanyDashboard({ company }) {
             <CardTitle>{company.name}</CardTitle>
             <CardDescription>Manažment vašej prevádzky</CardDescription>
           </div>
-          <Button 
-            variant="outline" 
-            size="sm"
-            onClick={() => setIsEditing(!isEditing)}
-            className="hover:bg-accent transition-colors"
-          >
-            {isEditing ? "Zrušiť" : "Upraviť"}
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsEditing(!isEditing)}
+              className="hover:bg-accent transition-colors"
+            >
+              {isEditing ? "Zrušiť" : "Upraviť"}
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={handleDeleteCompany}
+            >
+              <Trash2 className="h-4 w-4 mr-1" />
+              Odregistrovať
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           {isEditing ? (
