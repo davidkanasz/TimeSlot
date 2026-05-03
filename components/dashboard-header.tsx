@@ -15,12 +15,7 @@ export function DashboardHeader({ userName, isAdmin }: DashboardHeaderProps) {
         <div className="flex items-center gap-6">
           <Link href="/dashboard" className="flex items-center gap-2">
             <Clock className="h-8 w-8 text-white" />
-            <Link href="/dashboard">
-              {" "}
-              <h1 className="text-2xl font-bold text-foreground">
-                TimeSlot
-              </h1>{" "}
-            </Link>
+            <h1 className="text-2xl font-bold text-foreground">TimeSlot</h1>
           </Link>
 
           <nav className="hidden items-center gap-2 md:flex">
