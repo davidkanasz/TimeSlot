@@ -4,7 +4,7 @@ import { Button } from "../components/ui/button";
 import { Clock, Calendar, Settings, LayoutDashboard } from "lucide-react";
 
 interface DashboardHeaderProps {
-  userName: string;
+  userName?: string;
   isAdmin: boolean;
 }
 

@@ -1,7 +1,8 @@
-import {  NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "../../../../../lib/mongodb";
 import Reservation from "../../../../../models/Reservation";
+import { ADMIN_USER_ID } from "../../../../../lib/admin";
 
 // PATCH update reservation status (admin only)
 export async function PATCH(
@@ -16,7 +17,9 @@ export async function PATCH(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // TODO: Add admin role check here
+    if (userId !== ADMIN_USER_ID) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     const body = await request.json();
     const { status } = body;
@@ -63,7 +66,9 @@ export async function DELETE(
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // TODO: Add admin role check here
+    if (userId !== ADMIN_USER_ID) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     await dbConnect();
 

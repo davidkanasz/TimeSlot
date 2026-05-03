@@ -1,7 +1,8 @@
-import {  NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
 import dbConnect from "../../../../lib/mongodb";
 import Reservation from "../../../../models/Reservation";
+import { ADMIN_USER_ID } from "../../../../lib/admin";
 
 // GET all reservations (admin only)
 export async function GET(request) {
@@ -12,9 +13,9 @@ export async function GET(request) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    // TODO: Add admin role check here
-    // For now, we'll allow any authenticated user to access admin features
-    // In production, you should check if the user has admin role from Clerk
+    if (userId !== ADMIN_USER_ID) {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     await dbConnect();
 

@@ -1,16 +1,11 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
-import Link from "next/link";
-import { Button } from "../../components/ui/button";
 import {
-  Clock,
   Calendar,
   Users,
   CheckCircle,
   AlertCircle,
-  CalendarDays,
 } from "lucide-react";
-import { UserButton } from "@clerk/nextjs";
 import {
   Card,
   CardContent,
@@ -21,6 +16,8 @@ import {
 import { AdminReservationsList } from "../../components/admin-reservations-list";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../components/ui/tabs";
 import { getAdminStats } from "../../lib/stats";
+import { DashboardHeader } from "../../components/dashboard-header";
+import { ADMIN_USER_ID } from "../../lib/admin";
 
 export default async function AdminPage() {
   const { userId } = await auth();
@@ -29,40 +26,15 @@ export default async function AdminPage() {
     redirect("/sign-in");
   }
 
-  // TODO: Add admin role check here
-  // For now, any authenticated user can access admin features
+  if (userId !== ADMIN_USER_ID) {
+    redirect("/dashboard");
+  }
 
   const stats = await getAdminStats();
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-2">
-            <Clock className="h-8 w-8 text-white" />
-            <Link href="/dashboard">
-              {" "}
-              <h1 className="text-2xl font-bold text-foreground">
-                TimeSlot
-              </h1>{" "}
-            </Link>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard">
-              <Button variant="ghost" className="cursor-pointer">
-                Moje rezervácie
-              </Button>
-            </Link>
-            <Link href="/admin">
-              <Button variant="ghost" className="cursor-pointer">
-                Admin
-              </Button>
-            </Link>
-            <UserButton />
-          </div>
-        </div>
-      </header>
+      <DashboardHeader isAdmin={true} />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">

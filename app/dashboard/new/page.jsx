@@ -3,8 +3,9 @@ import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { Button } from "../../../components/ui/button";
-import { Clock, ArrowLeft, CalendarDays } from "lucide-react";
-import { UserButton } from "@clerk/nextjs";
+import { ArrowLeft } from "lucide-react";
+import { DashboardHeader } from "../../../components/dashboard-header";
+import { ADMIN_USER_ID } from "../../../lib/admin";
 import {
   Card,
   CardContent,
@@ -23,39 +24,7 @@ export default async function NewReservationPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="border-b border-border bg-card">
-        <div className="container mx-auto flex items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-2">
-            <Clock className="h-8 w-8  text-white" />
-            <Link href="/dashboard">
-              {" "}
-              <h1 className="text-2xl font-bold text-foreground">
-                TimeSlot
-              </h1>{" "}
-            </Link>
-          </div>
-          <div className="flex items-center gap-4">
-            <Link href="/dashboard">
-              <Button variant="ghost" className="cursor-pointer">
-                Moje rezervácie
-              </Button>
-            </Link>
-            <Link href="/dashboard/calendar">
-              <Button variant="ghost" className="gap-2 cursor-pointer">
-                <CalendarDays className="h-4 w-4" />
-                Kalendár
-              </Button>
-            </Link>
-            <Link href="/admin">
-              <Button variant="ghost" className="cursor-pointer">
-                Admin
-              </Button>
-            </Link>
-            <UserButton />
-          </div>
-        </div>
-      </header>
+      <DashboardHeader isAdmin={userId === ADMIN_USER_ID} />
 
       {/* Main Content */}
       <main className="container mx-auto px-4 py-8">
