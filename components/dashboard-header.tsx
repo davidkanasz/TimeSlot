@@ -1,7 +1,7 @@
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { Button } from "../components/ui/button";
-import { Clock, Calendar, Settings, LayoutDashboard } from "lucide-react";
+import { Clock, Settings, LayoutDashboard } from "lucide-react";
 
 interface DashboardHeaderProps {
   userName?: string;
@@ -28,12 +28,6 @@ export function DashboardHeader({ userName, isAdmin }: DashboardHeaderProps) {
               <Button variant="ghost" size="sm">
                 <LayoutDashboard className="mr-2 h-4 w-4" />
                 Dashboard
-              </Button>
-            </Link>
-            <Link href="/reservations">
-              <Button variant="ghost" size="sm">
-                <Calendar className="mr-2 h-4 w-4" />
-                Rezervácie
               </Button>
             </Link>
             {isAdmin && (
